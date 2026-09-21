@@ -16,7 +16,8 @@ API call
 https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
 """
 
-api_key = "f3ba8a6851e81ce35debe52bf1d265f5"
+api_key = ${{secrets.API_KEY}}
+# old = "f3ba8a6851e81ce35debe52bf1d265f5"
 
 
 def checkWeather(id):
