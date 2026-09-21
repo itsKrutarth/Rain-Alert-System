@@ -52,7 +52,7 @@ def military_to_standard(military_time_str):
     # %I = 12-hour, %M = minutes, %S = seconds, %p = AM/PM
     return time_obj.strftime("%I:%M:%S %p")
 
-def getForecast(locations, user):
+def getForecast(locations, user, phone, apikey):
     msg1 = f"Hello, {user}"
     print(msg1)
     for location in locations: 
@@ -83,11 +83,12 @@ def getForecast(locations, user):
             msg2 = f"\n No major weather update for today for {location}. Have a great day"
 
         print(msg2)
+    send_whatsapp(phone, apikey, msg1+msg2)
 
 
 
 Krutarth = ["Northbridge,MA,USA", "Lowell,MA,USA", "Merrimack,NH,USA", "Franklin,MA,USA", "Raynham,MA,USA"]
 
-getForecast(Krutarth, "Krutarth")
+getForecast(Krutarth, "Krutarth", os.environ["KRUTARTH_PHONE"], os.environ["KRUTARTH_CALLMEBOT_KEY"])
 
     
