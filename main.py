@@ -1,4 +1,5 @@
 import requests
+import os
 from datetime import datetime
 
 """
@@ -16,9 +17,14 @@ API call
 https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
 """
 
-api_key = ${{secrets.API_KEY}}
-# old = "f3ba8a6851e81ce35debe52bf1d265f5"
+api_key = os.environ["API_KEY"]
 
+def send_whatsapp(phone, apikey, message):
+    url = "https://api.callmebot.com/whatsapp.php"
+    params = {"phone": phone, "text": message, "apikey": apikey}
+    resp = requests.get(url, params=params, timeout=15)
+    resp.raise_for_status()
+    print(f"Sent to {phone}: {resp.status_code}")
 
 def checkWeather(id):
     weather = ""
@@ -30,6 +36,10 @@ def checkWeather(id):
             weather = "Rain"
     elif (id>=600 and id<=699):
          weather="Snow"
+    elif (id==741):
+        weather="Fog"
+    elif (id==701):
+            weather="Mist"
     else: 
         weather=""
 
@@ -53,9 +63,9 @@ def getForecast(locations, user):
         data = response.json()
         lat = data["coord"]["lat"]
         lon = data["coord"]["lon"]
-
+        # print(f"{lat}, {lon}")
         weather_five_days = "https://api.openweathermap.org/data/2.5/forecast?"
-        parameters2 = {"lat": lat, "lon": lat, "appid": api_key, "cnt": 4}
+        parameters2 = {"lat": lat, "lon": lon, "appid": api_key, "cnt": 4}
         response2 = requests.get(weather_five_days, params=parameters2)
 
         data2 = response2.json()
@@ -76,11 +86,8 @@ def getForecast(locations, user):
 
 
 
-Krutarth = ["Northbridge,MA,USA", "Lowell,MA,USA", "Merrimack,NH,USA"]
-Janki = ["Northbridge,MA,USA", "Franklin,MA,USA", "Raynham,MA,USA"]
+Krutarth = ["Northbridge,MA,USA", "Lowell,MA,USA", "Merrimack,NH,USA", "Franklin,MA,USA", "Raynham,MA,USA"]
 
 getForecast(Krutarth, "Krutarth")
-getForecast(Janki, "Janki")
-
 
     

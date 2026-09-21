@@ -1,0 +1,34 @@
+name: Morning Weather Report
+
+on:
+  schedule:
+    # Runs at 11:00 UTC daily = 7:00 AM EDT / 6:00 AM EST.
+    # Adjust the hour if you want a different local send time;
+    # GitHub Actions cron always uses UTC and can lag up to ~15 min at peak times.
+    - cron: '0 11 * * *'
+  workflow_dispatch: {}   # allows manual "Run workflow" trigger from the Actions tab for testing
+
+jobs:
+  send-weather:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run weather script
+        run: python weather.py
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+          KRUTARTH_PHONE: ${{ secrets.KRUTARTH_PHONE }}
+          KRUTARTH_CALLMEBOT_KEY: ${{ secrets.KRUTARTH_CALLMEBOT_KEY }}
+          # JANKI_PHONE: ${{ secrets.JANKI_PHONE }}
+          # JANKI_CALLMEBOT_KEY: ${{ secrets.JANKI_CALLMEBOT_KEY }}
