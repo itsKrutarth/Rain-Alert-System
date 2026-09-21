@@ -41,8 +41,10 @@ def military_to_standard(military_time_str):
     # %I = 12-hour, %M = minutes, %S = seconds, %p = AM/PM
     return time_obj.strftime("%I:%M:%S %p")
 
-def getForecast(locations):
-    for location in krutarth_locations: 
+def getForecast(locations, user):
+    msg1 = f"Hello, {user}"
+    print(msg1)
+    for location in locations: 
         weather_by_city = "https://api.openweathermap.org/data/2.5/weather?"
         parameters1 = {"q": location, "appid": api_key}
         response = requests.get(weather_by_city, params=parameters1)
@@ -62,22 +64,22 @@ def getForecast(locations):
 
         time = military_to_standard(date_text[1])
         weather = checkWeather(id)
-        msg = ""
+        
         if (weather!=""):
-            msg = f"Hello, Today there will be an occurrence of {weather} around {location} area, with the condition of {condition}, around {time}. Please prepare for your day accordingly. Have a wonderfull day!"
+            msg2 = f"\n Today there will be an occurrence of {weather} around {location} area, with the condition of {condition}, around {time}. Please prepare for your day accordingly. Have a wonderfull day!"
 
         else:
-            msg = f"Hello, No major weather update for today for {location}. Have a great day"
+            msg2 = f"\n No major weather update for today for {location}. Have a great day"
 
-        print(msg)
+        print(msg2)
 
 
 
-krutarth_locations = ["Northbridge,MA,USA", "Lowell,MA,USA", "Merrimack,NH,USA"]
-janki_locations = ["Northbridge,MA,USA", "Franklin,MA,USA", "Raynham,MA,USA"]
+Krutarth = ["Northbridge,MA,USA", "Lowell,MA,USA", "Merrimack,NH,USA"]
+Janki = ["Northbridge,MA,USA", "Franklin,MA,USA", "Raynham,MA,USA"]
 
-getForecast(krutarth_locations)
-getForecast(janki_locations)
+getForecast(Krutarth, "Krutarth")
+getForecast(Janki, "Janki")
 
 
     
