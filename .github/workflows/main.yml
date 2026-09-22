@@ -7,7 +7,7 @@ on:
     # GitHub Actions cron always uses UTC and can lag up to ~15 min at peak times.
     - cron: '0 10 * * *'
   push:
-    branch:
+    branches:
        - main
   workflow_dispatch: {}   # allows manual "Run workflow" trigger from the Actions tab for testing
 
