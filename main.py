@@ -54,6 +54,7 @@ def military_to_standard(military_time_str):
 
 def getForecast(locations, user, phone, apikey):
     msg1 = f"Hello, {user}"
+    msg2=""
     print(msg1)
     for location in locations: 
         weather_by_city = "https://api.openweathermap.org/data/2.5/weather?"
@@ -81,7 +82,7 @@ def getForecast(locations, user, phone, apikey):
 
         else:
             msg2 = f"\n No major weather update for today for {location}. Have a great day"
-
+            msg2 +=msg2
         print(msg2)
     send_whatsapp(phone, apikey, msg1+msg2)
 
