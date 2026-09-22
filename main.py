@@ -82,8 +82,9 @@ def getForecast(locations, user, phone, apikey):
 
         else:
             msg2 = f"\nNo major weather update for today for {location}. Have a great day"
-            msg2 +=msg2
-        print(msg2)
+
+        msg2+=msg2
+        
     send_whatsapp(phone, apikey, msg1+msg2)
 
 
