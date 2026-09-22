@@ -78,10 +78,10 @@ def getForecast(locations, user, phone, apikey):
         weather = checkWeather(id)
         
         if (weather!=""):
-            msg2 = f"\n Today there will be an occurrence of {weather} around {location} area, with the condition of {condition}, around {time}. Please prepare for your day accordingly. Have a wonderfull day!"
+            msg2 = f"\nToday there will be an occurrence of {weather} around {location} area, with the condition of {condition}, around {time}. Please prepare for your day accordingly. Have a wonderfull day!"
 
         else:
-            msg2 = f"\n No major weather update for today for {location}. Have a great day"
+            msg2 = f"\nNo major weather update for today for {location}. Have a great day"
             msg2 +=msg2
         print(msg2)
     send_whatsapp(phone, apikey, msg1+msg2)
