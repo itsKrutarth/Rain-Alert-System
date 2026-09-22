@@ -84,7 +84,7 @@ def getForecast(locations, user, phone, apikey):
 
         all_messages += msg2
 
-    send_whatsapp(phone, apikey, msg1+all_messages+" Please prepare for your day accordingly. Have a wonderfull day!")
+    send_whatsapp(phone, apikey, msg1+all_messages+"\nPlease prepare for your day accordingly. Have a wonderfull day!")
 
 
 
