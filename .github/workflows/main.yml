@@ -2,10 +2,8 @@ name: Morning Weather Report
 
 on:
   schedule:
-    # Runs at 11:00 UTC daily = 7:00 AM EDT / 6:00 AM EST.
-    # Adjust the hour if you want a different local send time;
-    # GitHub Actions cron always uses UTC and can lag up to ~15 min at peak times.
-    - cron: '30 10 * * *'
+    - cron: '0 5 * * *'
+      timezone: "America/New_York"
   push:
     branches:
        - main
